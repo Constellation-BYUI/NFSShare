@@ -1,0 +1,83 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nfs
+  labels:
+    app: nfs
+spec:
+  ports:
+  - port: 2049
+    name: nfs
+  clusterIP: None
+  selector:
+    app: nfs
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nfs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nfs
+  template:
+    metadata:
+      labels:
+        app: nfs
+    spec:
+      containers:
+      - name: nfs
+        image: gcr.io gcr.io/constellation-275522/nfs
+        ports:
+        - containerPort: 2049
+          name: nfs
+        resources:
+          limits:
+            cpu: ".5"
+            memory: "500Mi"
+          requests:
+            cpu: ".25"
+            memory: "250Mi"
+        volumeMounts:
+        - name: nfs
+          mountPath: /nfsshare
+        livenessProbe:
+          tcpSocket:
+            port: 2049
+          initialDelaySeconds: 3
+          periodSeconds: 3
+  volumeClaimTemplates:
+  - metadata:
+      name: nfs
+    spec:
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: 2Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cit262-groupall-service
+spec:
+  selector:
+    app: cit262-groupall
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cit262-groupall-loadbalancer
+spec:
+  selector:
+    app: cit262-groupall
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 80
+   
