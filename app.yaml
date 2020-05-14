@@ -17,6 +17,7 @@ kind: StatefulSet
 metadata:
   name: nfs
 spec:
+  serviceName: nfs
   replicas: 1
   selector:
     matchLabels:
