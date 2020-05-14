@@ -13,7 +13,7 @@ spec:
     app: nfs
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: nfs
 spec:
