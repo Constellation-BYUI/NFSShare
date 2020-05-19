@@ -48,9 +48,6 @@ spec:
             port: 2049
           initialDelaySeconds: 3
           periodSeconds: 3
-        securityContext:
-          allowPrivilegeEscalation: true
-          runAsUser: 0
   volumeClaimTemplates:
   - metadata:
       name: nfs
