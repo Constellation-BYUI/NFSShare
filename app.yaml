@@ -8,7 +8,6 @@ spec:
   ports:
   - port: 2049
     name: nfs
-  clusterIP: None
   selector:
     app: nfs
 ---
