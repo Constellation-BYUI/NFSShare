@@ -10,7 +10,7 @@ spec:
     name: nfs
   selector:
     app: nfs
-  clusterIp: none
+  clusterIP: none
   type: LoadBalancer
 ---
 apiVersion: apps/v1
