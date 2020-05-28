@@ -1,39 +1,38 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: nfs
+  name: nfs-local
   labels:
-    app: nfs
+    app: nfs-local
 spec:
   ports:
   - port: 2049
-    name: nfs
+    name: nfs-local
   selector:
-    app: nfs
-  clusterIP: None
+    app: nfs-local
   type: LoadBalancer
 ---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: nfs
+  name: nfs-local
 spec:
-  serviceName: nfs
+  serviceName: nfs-local
   replicas: 1
   selector:
     matchLabels:
-      app: nfs
+      app: nfs-local
   template:
     metadata:
       labels:
-        app: nfs
+        app: nfs-loal
     spec:
       containers:
-      - name: nfs
+      - name: nfs-local
         image: gcr.io/constellation-275522/nfs
         ports:
         - containerPort: 2049
-          name: nfs
+          name: nfs-local
         resources:
           limits:
             cpu: ".5"
@@ -42,7 +41,7 @@ spec:
             cpu: ".25"
             memory: "250Mi"
         volumeMounts:
-        - name: nfs
+        - name: nfs-local
           mountPath: /nfsshare
         livenessProbe:
           tcpSocket:
@@ -51,7 +50,7 @@ spec:
           periodSeconds: 3
   volumeClaimTemplates:
   - metadata:
-      name: nfs
+      name: nfs-local
     spec:
       accessModes:
         - ReadWriteOnce
