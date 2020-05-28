@@ -34,13 +34,3 @@ steps:
   - --location=us-east1-b
   - --cluster=cluster-1
 
-  # This step deploys the dev application in Kubernetes
-  - name: 'gcr.io/cloud-builders/gcloud'
-    args:
-    - builds
-    - submit
-    - --config
-    - cloudbuild-dev.yaml
-    - --substitutions
-    - _SHORT_SHA=$SHORT_SHA
-    - .
