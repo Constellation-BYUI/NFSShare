@@ -29,7 +29,7 @@ steps:
 - name: 'gcr.io/cloud-builders/gke-deploy'
   args:
   - run
-  - --filename=app.yaml
+  - --filename=dev.yaml
   - --image=gcr.io/$PROJECT_ID/nfs:$SHORT_SHA
   - --location=us-east1-b
   - --cluster=cluster-1
