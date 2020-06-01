@@ -48,6 +48,8 @@ spec:
             port: 2049
           initialDelaySeconds: 3
           periodSeconds: 3
+        securityContext:
+          privileged: true          
   volumeClaimTemplates:
   - metadata:
       name: nfs-local
