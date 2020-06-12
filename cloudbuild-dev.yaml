@@ -15,11 +15,11 @@ steps:
 # This step deploys the application in Kubernetes
 - name: 'gcr.io/cloud-builders/gke-deploy'
   args:
-  - run
-  - --filename=dev.yaml
-  - --image=gcr.io/$PROJECT_ID/nfs:$_SHORT_SHA
-  - --location=us-east1-b
-  - --cluster=cluster-1
+    - run
+    - --filename=dev.yaml
+    - --image=gcr.io/$PROJECT_ID/nfs:$_SHORT_SHA
+    - --location=us-east1-b
+    - --cluster=cluster-1
 
 # This step starts the nfs pod
 - name: 'gcr.io/cloud-builders/kubectl'
