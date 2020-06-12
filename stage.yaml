@@ -1,0 +1,62 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nfs-stage
+  labels:
+    app: nfs-stage
+spec:
+  ports:
+  - port: 2049
+    name: nfs-stage
+  selector:
+    app: nfs-stage
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: nfs-stage
+spec:
+  serviceName: nfs-stage
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nfs-stage
+  template:
+    metadata:
+      labels:
+        app: nfs-stage
+    spec:
+      containers:
+      - name: nfs-stage
+        image: gcr.io/constellation-275522/nfs
+        ports:
+        - containerPort: 2049
+          name: nfs-stage
+        resources:
+          limits:
+            cpu: ".5"
+            memory: "500Mi"
+          requests:
+            cpu: ".25"
+            memory: "250Mi"
+        volumeMounts:
+        - name: nfs-stage
+          mountPath: /nfsshare
+        livenessProbe:
+          tcpSocket:
+            port: 2049
+          initialDelaySeconds: 3
+          periodSeconds: 3
+        securityContext:
+          privileged: true          
+  volumeClaimTemplates:
+  - metadata:
+      name: nfs-stage
+    spec:
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: 2Gi
+
+   
