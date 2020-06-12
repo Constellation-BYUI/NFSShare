@@ -10,7 +10,6 @@ spec:
     name: nfs-dev
   selector:
     app: nfs-dev
-  type: LoadBalancer
 ---
 apiVersion: apps/v1
 kind: StatefulSet

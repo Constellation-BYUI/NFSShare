@@ -23,7 +23,7 @@ steps:
   id: Stop Pod
   args:
     - 'scale'
-    - 'deploy'
+    - 'StatefulSet'
     - 'nfs-local'
     - '--replicas=0'
   env:
@@ -44,7 +44,7 @@ steps:
   id: Scale Pod
   args:
     - 'scale'
-    - 'deploy'
+    - 'StatefulSet'
     - 'nfs-local'
     - '--replicas=1'    
   env:
