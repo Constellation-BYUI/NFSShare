@@ -23,12 +23,12 @@ steps:
 
 # This step starts the nfs pod
 - name: 'gcr.io/cloud-builders/kubectl'
-id: Scale Pod
-args:
-  - 'scale'
-  - 'StatefulSet'
-  - 'nfs-dev'
-  - '--replicas=1'
-env:
-  - 'CLOUDSDK_COMPUTE_ZONE=us-east1-b'
-  - 'CLOUDSDK_CONTAINER_CLUSTER=cluster-1'    
+  id: Scale Pod
+  args:
+    - 'scale'
+    - 'StatefulSet'
+    - 'nfs-dev'
+    - '--replicas=1'
+  env:
+    - 'CLOUDSDK_COMPUTE_ZONE=us-east1-b'
+    - 'CLOUDSDK_CONTAINER_CLUSTER=cluster-1'    
