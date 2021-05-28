@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
       - name: nfs-dev
-        image: gcr.io/constellation-275522/nfs
+        image: gcr.io/constellation-275522/nfs@sha256:eaa8dd240dc2c75edd0010f4e151f19c699c2f9ab0cc23e45c7eeead95a4dd0f
         ports:
         - containerPort: 2049
           name: nfs-dev
